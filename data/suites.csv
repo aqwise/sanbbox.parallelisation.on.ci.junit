@@ -1,4 +1,4 @@
 "DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
-"Test the isPalindrome method of the StringUtils","19","testIsPalindrome()","","Sat Jul 27 16:22:45 UTC 2024","passed","Sat Jul 27 16:22:45 UTC 2024","","StringUtilsTest","StringUtilsTest","testIsPalindrome"
-"Test the greet method of the GreetingService","26","testGreet()","","Sat Jul 27 16:22:52 UTC 2024","passed","Sat Jul 27 16:22:52 UTC 2024","","GreetingServiceTest","GreetingServiceTest","testGreet"
-"Test the addition operation of the Calculator","6","testAdd()","","Sat Jul 27 16:22:52 UTC 2024","passed","Sat Jul 27 16:22:52 UTC 2024","","CalculatorTest","CalculatorTest","testAdd"
+"Test the isPalindrome method of the StringUtils","21","testIsPalindrome()","","Sat Jul 27 16:20:55 UTC 2024","passed","Sat Jul 27 16:20:55 UTC 2024","","StringUtilsTest","StringUtilsTest","testIsPalindrome"
+"Test the addition operation of the Calculator","4","testAdd()","","Sat Jul 27 16:20:56 UTC 2024","passed","Sat Jul 27 16:20:56 UTC 2024","","CalculatorTest","CalculatorTest","testAdd"
+"Test the greet method of the GreetingService","37","testGreet()","","Sat Jul 27 16:20:56 UTC 2024","passed","Sat Jul 27 16:20:56 UTC 2024","","GreetingServiceTest","GreetingServiceTest","testGreet"
