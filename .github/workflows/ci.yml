@@ -37,5 +37,45 @@ jobs:
       - name: Run tests for chunk ${{ matrix.chunk }}
         run: ./scripts/divide_tests.sh 2 ${{ matrix.chunk }}
 
-      - name: Publish Allure Report
-        run: mvn allure:aggregate
+      - name: Archive Allure Results
+        uses: actions/upload-artifact@v2
+        with:
+          name: allure-results-${{ matrix.chunk }}
+          path: target/allure-results
+
+  merge-and-publish:
+    runs-on: ubuntu-latest
+    needs: test-job-unix
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Download Allure Results
+        uses: actions/download-artifact@v2
+        with:
+          name: allure-results-1
+          path: allure-results/1
+
+      - name: Download Allure Results
+        uses: actions/download-artifact@v2
+        with:
+          name: allure-results-2
+          path: allure-results/2
+
+      - name: Merge Allure Results
+        run: mkdir -p target/allure-results && cp -r allure-results/*/* target/allure-results/
+
+      - name: Generate Allure Report
+        run: mvn allure:report
+
+      - name: Archive Allure Report
+        uses: actions/upload-artifact@v2
+        with:
+          name: allure-report
+          path: target/site/allure-maven-plugin
+
+      - name: Deploy Allure Report
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./target/site/allure-maven-plugin
