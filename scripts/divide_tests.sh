@@ -9,10 +9,6 @@ CHUNK_INDEX=$2
 # Get the list of test classes
 TEST_CLASSES=$(mvn -q exec:java -Dexec.mainClass=TestClassSorter)
 
-# Debug: Print the raw test classes output
-echo "Raw test classes output:"
-echo "$TEST_CLASSES"
-
 # Convert newline-separated string to array
 IFS=$'\n' read -rd '' -a TEST_CLASSES_ARRAY <<<"$TEST_CLASSES"
 
@@ -34,16 +30,8 @@ fi
 # Extract the test classes for this chunk
 CHUNK_TESTS=(${TEST_CLASSES_ARRAY[@]:$START_INDEX:$(( END_INDEX - START_INDEX + 1 ))})
 
-# Join test classes with comma for Maven command
+# Join test classes with comma
 TEST_CLASSES_STR=$(IFS=, ; echo "${CHUNK_TESTS[*]}")
 
-# Debug messages
-echo "Total test classes found: ${TEST_CLASSES_ARRAY[*]}"
-echo "Test classes for chunk $CHUNK_INDEX: ${CHUNK_TESTS[*]}"
-echo "Running Maven command: mvn test -Dtest=${TEST_CLASSES_STR}"
-
-# Run the tests for this chunk
-mvn test -Dtest="${TEST_CLASSES_STR}"
-
-# Generate Allure report
-mvn allure:report
+# Output the test classes string
+echo $TEST_CLASSES_STR

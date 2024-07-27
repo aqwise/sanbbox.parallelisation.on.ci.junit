@@ -34,8 +34,12 @@ jobs:
       - name: Make divide_tests.sh executable
         run: chmod +x scripts/divide_tests.sh
 
-      - name: Run tests for chunk ${{ matrix.chunk }}
-        run: ./scripts/divide_tests.sh 2 ${{ matrix.chunk }}
+      - name: Divide tests and run tests for chunk ${{ matrix.chunk }}
+        run: |
+          TEST_CLASSES=$(./scripts/divide_tests.sh 2 ${{ matrix.chunk }})
+          echo "Running tests for classes: $TEST_CLASSES"
+          mvn -q clean test -Dmaven.test.failure.ignore=false -Dtest=$TEST_CLASSES
+          mvn -q allure:report
 
       - name: Archive Allure Results
         uses: actions/upload-artifact@v2
