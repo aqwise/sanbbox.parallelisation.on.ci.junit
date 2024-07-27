@@ -66,4 +66,5 @@ jobs:
         run: mvn --batch-mode --update-snapshots clean install
 
       - name: Run tests for chunk ${{ matrix.chunk }}
-        run: cmd /c scripts/divide_tests.bat 2 ${{ matrix.chunk }}
+        working-directory: ./scripts
+        run: cmd /c divide_tests.bat 2 ${{ matrix.chunk }}
