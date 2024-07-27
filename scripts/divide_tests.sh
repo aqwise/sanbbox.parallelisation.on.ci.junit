@@ -39,6 +39,7 @@ TEST_CLASSES_STR=$(IFS=, ; echo "${CHUNK_TESTS[*]}")
 # Debug messages
 echo "Total test classes found: ${TEST_CLASSES_ARRAY[*]}"
 echo "Test classes for chunk $CHUNK_INDEX: ${CHUNK_TESTS[*]}"
+echo "Running Maven command: mvn test -Dtest=$TEST_CLASSES_STR"
 
 # Run the tests for this chunk
 mvn test -Dtest=$TEST_CLASSES_STR
