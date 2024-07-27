@@ -72,7 +72,7 @@ jobs:
         run: mvn allure:aggregate -Dallure.results.directory=target/allure-results
 
       - name: Build Allure Report
-        run: mvn allure:report -Dallure.results.directory=target/allure-results -Dallure.report.directory=target/site/allure-maven-plugin
+        run: mvn allure:report
 
       - name: Archive Allure Report
         uses: actions/upload-artifact@v2
