@@ -44,3 +44,6 @@ echo "Running Maven command: mvn test -Dtest=${TEST_CLASSES_STR}"
 
 # Run the tests for this chunk
 mvn test -Dtest="${TEST_CLASSES_STR}"
+
+# Generate Allure report
+mvn allure:report
