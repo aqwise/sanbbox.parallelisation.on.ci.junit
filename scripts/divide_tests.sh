@@ -1,9 +1,5 @@
 #!/bin/bash
 
-## Set JAVA_HOME and update PATH for Unix-based systems
-#export JAVA_HOME="/usr/lib/jvm/java-21-openjdk"
-#export PATH="$JAVA_HOME/bin:$PATH"
-
 # Number of chunks
 NUM_CHUNKS=$1
 
@@ -17,8 +13,8 @@ TEST_CLASSES=$(mvn -q exec:java -Dexec.mainClass=TestClassSorter)
 echo "Raw test classes output:"
 echo "$TEST_CLASSES"
 
-# Convert space-separated string to array
-TEST_CLASSES_ARRAY=($TEST_CLASSES)
+# Convert newline-separated string to array
+IFS=$'\n' read -rd '' -a TEST_CLASSES_ARRAY <<<"$TEST_CLASSES"
 
 # Total number of test classes
 TOTAL_TESTS=${#TEST_CLASSES_ARRAY[@]}
