@@ -53,7 +53,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <mainClass>com.example.TestClassSorter</mainClass>
+                    <mainClass>TestClassSorter</mainClass>
                     <arguments>
                         <argument>target/test-classes</argument>
                     </arguments>
