@@ -1,5 +1,9 @@
 #!/bin/bash
 
+## Set JAVA_HOME and update PATH for Unix-based systems
+#export JAVA_HOME="/usr/lib/jvm/java-21-openjdk"
+#export PATH="$JAVA_HOME/bin:$PATH"
+
 # Number of chunks
 NUM_CHUNKS=$1
 
@@ -7,10 +11,11 @@ NUM_CHUNKS=$1
 CHUNK_INDEX=$2
 
 # Get the list of test classes
-TEST_CLASSES=$(mvn -q test-compile exec:java \
-  -Dexec.classpathScope=test \
-  -Dexec.mainClass=org.apache.maven.plugin.surefire.SurefireTestClassScanner \
-  -Dexec.args="target/test-classes" | grep ".class" | sed 's|\.class||g' | sed 's|/|.|g' | sed 's|target.test-classes.||g')
+TEST_CLASSES=$(mvn -q exec:java -Dexec.mainClass=com.example.TestClassSorter)
+
+# Debug: Print the raw test classes output
+echo "Raw test classes output:"
+echo "$TEST_CLASSES"
 
 # Convert space-separated string to array
 TEST_CLASSES_ARRAY=($TEST_CLASSES)
@@ -39,7 +44,7 @@ TEST_CLASSES_STR=$(IFS=, ; echo "${CHUNK_TESTS[*]}")
 # Debug messages
 echo "Total test classes found: ${TEST_CLASSES_ARRAY[*]}"
 echo "Test classes for chunk $CHUNK_INDEX: ${CHUNK_TESTS[*]}"
-echo "Running Maven command: mvn test -Dtest=$TEST_CLASSES_STR"
+echo "Running Maven command: mvn test -Dtest=${TEST_CLASSES_STR}"
 
 # Run the tests for this chunk
-mvn test -Dtest=$TEST_CLASSES_STR
+mvn test -Dtest="${TEST_CLASSES_STR}"
