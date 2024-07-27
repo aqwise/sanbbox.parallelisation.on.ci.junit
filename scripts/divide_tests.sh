@@ -11,7 +11,7 @@ NUM_CHUNKS=$1
 CHUNK_INDEX=$2
 
 # Get the list of test classes
-TEST_CLASSES=$(mvn -q exec:java -Dexec.mainClass=com.example.TestClassSorter)
+TEST_CLASSES=$(mvn -q exec:java -Dexec.mainClass=TestClassSorter)
 
 # Debug: Print the raw test classes output
 echo "Raw test classes output:"
