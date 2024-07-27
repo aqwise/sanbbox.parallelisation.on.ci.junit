@@ -31,6 +31,9 @@ jobs:
       - name: Build with Maven
         run: mvn --batch-mode --update-snapshots clean install
 
+      - name: Make divide_tests.sh executable
+        run: chmod +x scripts/divide_tests.sh
+
       - name: Run tests for chunk ${{ matrix.chunk }}
         run: ./scripts/divide_tests.sh 2 ${{ matrix.chunk }}
 
@@ -61,6 +64,9 @@ jobs:
 
       - name: Build with Maven
         run: mvn --batch-mode --update-snapshots clean install
+
+      - name: Make divide_tests.sh executable
+        run: chmod +x scripts/divide_tests.sh
 
       - name: Run tests for chunk ${{ matrix.chunk }}
         run: ./scripts/divide_tests.sh 2 ${{ matrix.chunk }}
