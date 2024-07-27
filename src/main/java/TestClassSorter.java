@@ -25,18 +25,15 @@ public class TestClassSorter {
             List<String> testClassPaths = paths
                     .filter(Files::isRegularFile)
                     .map(Path::toString)
-                    .filter(path -> path.endsWith("Test.class"))
-                    .collect(Collectors.toList());
+                    .filter(path -> path.endsWith("Test.class")).toList();
 
             System.out.println("Test class files found:");
             testClassPaths.forEach(System.out::println);
 
-            List<String> testClassNames = testClassPaths.stream()
+            return testClassPaths.stream()
                     .map(TestClassSorter::convertToClassName)
                     .sorted()
                     .collect(Collectors.toList());
-
-            return testClassNames;
         }
     }
 
